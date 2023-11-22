@@ -18,6 +18,7 @@ def sentify(text):
             sentence.append(yodafy(clause))
         sentence[-1].append(end_punctuation)
         output.append(sentence)
+      
     return output
 
 def clausify(sent):
@@ -97,8 +98,11 @@ def get_dataset():
 def format_data_yoda(dataset, indices):
     output = []
     for i in indices:
-        output.append("User: Tell me about " + dataset[i]['term'] + ".\n" +
-                      "Yoda: " + yoda(dataset[i]['generic_sentence']))
+        try:
+            output.append("User: Tell me about " + dataset[i]['term'] + ".\n" +
+                          "Yoda: " + yoda(dataset[i]['generic_sentence']))
+        except:
+            continue
     return output
 
 
