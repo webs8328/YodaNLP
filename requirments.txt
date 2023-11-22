@@ -1,0 +1,6 @@
+General:
+    pytorch
+For the Yoda data creator:
+    pip install -U spacy
+    python3 -m spacy download en_core_web_sm --no-cache-dir
+    pip install datasets transformers huggingface_hub
