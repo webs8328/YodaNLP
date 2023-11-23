@@ -100,7 +100,7 @@ def format_data_yoda(dataset, indices):
     for i in indices:
         try:
             output.append("User: Tell me about " + dataset[i]['term'] + ".\n" +
-                          "Yoda: " + yoda(dataset[i]['generic_sentence']))
+                          "Yoda: " + yoda(dataset[i]['generic_sentence']) + "\n<|endoftext|>")
         except:
             continue
     return output
@@ -110,7 +110,7 @@ def format_data_human(dataset, indices):
     output = []
     for i in indices:
         output.append("User: Tell me about " + dataset[i]['term'] + ".\n" +
-                      "Human: " + dataset[i]['generic_sentence'])
+                      "Human: " + dataset[i]['generic_sentence'] + "\n<|endoftext|>")
     return output
         
 def format_data_bert_model(dataset, indices_yoda, indices_human):
