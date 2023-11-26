@@ -45,7 +45,7 @@ def fine_tune_gpt2(model_name, train_file, validation_file, output_dir, config, 
         tokenizer= tokenizer
     )
     trainer.train()
-    model.save_pretrained(output_dir)
+    lora_model.save_pretrained(output_dir)
     tokenizer.save_pretrained(output_dir)
 
 def create_pipeline(checkpoint_path):
