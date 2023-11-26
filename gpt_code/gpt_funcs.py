@@ -1,8 +1,22 @@
-from transformers import GPT2LMHeadModel, GPT2Tokenizer, GPT2Config
+from transformers import GPT2LMHeadModel, GPT2Tokenizer, GPT2Config, EvalPrediction
 from transformers import TextDataset, DataCollatorForLanguageModeling
 from transformers import Trainer, TrainingArguments
 from transformers import pipeline, set_seed
 from peft import LoraConfig, get_peft_model
+import numpy as np
+from scipy.special import softmax
+from sklearn.metrics import log_loss
+
+
+
+#Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
+def compute_metrics(p: EvalPrediction):
+    logits = p.predictions
+    labels = p.label_ids
+    probabilities = softmax(logits, axis=-1)
+    loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
+    perplexity = np.exp(loss)
+    return {"perplexity": perplexity}
 
 
 #Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
@@ -15,7 +29,7 @@ def compute_metrics(p: EvalPrediction):
     return {"perplexity": perplexity}
 
 #Citation: Got this function template from https://212digital.medium.com/fine-tuning-the-gpt-2-large-language-model-unlocking-its-full-potential-66e3a082ab9c
-def fine_tune_gpt2(model_name, train_file, validation_file, output_dir, config, save_steps = 500, epochs = 1):
+def fine_tune_gpt2(model_name, train_file, validation_file, output_dir, config, save_steps = 500, eval_steps=500, epochs = 1, max_steps = -1):
     model = GPT2LMHeadModel.from_pretrained(model_name)
     lora_model = get_peft_model(model, config)
     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
@@ -34,6 +48,11 @@ def fine_tune_gpt2(model_name, train_file, validation_file, output_dir, config, 
         num_train_epochs=epochs,
         per_device_train_batch_size=4,
         save_steps=save_steps,
+        evaluation_strategy="steps", 
+        do_eval=True,
+        eval_steps=eval_steps, 
+        max_steps=max_steps, 
+        eval_accumulation_steps=15
     )
     trainer = Trainer(
         model=lora_model,
