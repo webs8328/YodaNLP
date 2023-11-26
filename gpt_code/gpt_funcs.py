@@ -18,6 +18,16 @@ def compute_metrics(p: EvalPrediction):
     perplexity = np.exp(loss)
     return {"perplexity": perplexity}
 
+
+#Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
+def compute_metrics(p: EvalPrediction):
+    logits = p.predictions
+    labels = p.label_ids
+    probabilities = softmax(logits, axis=-1)
+    loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
+    perplexity = np.exp(loss)
+    return {"perplexity": perplexity}
+
 #Citation: Got this function template from https://212digital.medium.com/fine-tuning-the-gpt-2-large-language-model-unlocking-its-full-potential-66e3a082ab9c
 def fine_tune_gpt2(model_name, train_file, validation_file, output_dir, config, save_steps = 500, eval_steps=500, epochs = 1, max_steps = -1):
     model = GPT2LMHeadModel.from_pretrained(model_name)
