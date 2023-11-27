@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, peft_model
 from transformers import GPT2LMHeadModel, GPT2Tokenizer, TextDataset, DataCollatorForLanguageModeling, Trainer, TrainingArguments, EvalPrediction, EarlyStoppingCallback
 import os
+from transformers import pipeline, set_seed
 import numpy as np
 from sklearn.metrics import log_loss
 from torch import softmax
@@ -129,8 +130,5 @@ class LoRATuner:
         model = GPT2LMHeadModel.from_pretrained(checkpoint_path)
         return pipeline('text-generation', model=model, tokenizer = tokenizer)
 
-    def get_response(pipeline, prompt, checkpoint_path):
-        tokenizer = GPT2Tokenizer.from_pretrained(checkpoint_path)
-        model = GPT2LMHeadModel.from_pretrained(checkpoint_path)
-        pip = pipeline('text-generation', model=model, tokenizer = tokenizer)
-        return pip(prompt)[0]['generated_text']
+    def get_response(pipeline, prompt):
+        return pipeline(prompt)[0]['generated_text']
