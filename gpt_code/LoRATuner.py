@@ -70,6 +70,8 @@ class LoRATuner:
             file_path=val_file,
             block_size=128)
         print(val_dataset)
+
+        print(os.path.join('./logs/', model_id))
         
         data_collator = DataCollatorForLanguageModeling(tokenizer=self.tokenizer, mlm=False)
         training_args = TrainingArguments(
@@ -82,7 +84,7 @@ class LoRATuner:
             evaluation_strategy="steps", 
             do_eval=True,
             eval_steps=eval_steps, 
-            logging_dir='./logs',
+            logging_dir=os.path.join('./logs/', model_id),
             logging_steps=logging_steps,
             max_steps=max_steps,
             eval_accumulation_steps=10, 
