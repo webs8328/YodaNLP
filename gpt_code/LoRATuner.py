@@ -7,12 +7,11 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer, TextDataset, DataCollat
 import os
 from transformers import pipeline, set_seed
 import numpy as np
-from sklearn.metrics import log_loss
-from torch import softmax
 from datasets import load_metric
 import evaluate
 from transformers import set_seed
-
+from scipy.special import softmax
+from sklearn.metrics import log_loss
 
 
 class LoRATuner:
@@ -46,13 +45,13 @@ class LoRATuner:
     #             print(name.split(".")[-1])
 
     #Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
-    #def compute_metrics(self, eval_pred):
-        #logits = p.predictions
-        #labels = p.label_ids
-        #probabilities = softmax(logits, axis=-1)
-        #loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
-        #perplexity = np.exp(loss)
-        #return {"perplexity": perplexity}
+    def compute_metrics(self, p):
+        logits = p.predictions
+        labels = p.label_ids
+        probabilities = softmax(logits, axis=-1)
+        loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
+        perplexity = np.exp(loss)
+        return {"perplexity": perplexity}
     #    perplex = load_metric('perplexity')
     #    predictions, labels = eval_pred
     #    predictions = predictions[:, 0]
@@ -123,8 +122,8 @@ class LoRATuner:
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             tokenizer=self.tokenizer, 
-            #compute_metrics=compute_metrics,
-            #callbacks=[EarlyStoppingCallback(early_stopping_patience = 2)]
+            compute_metrics=self.compute_metrics,
+            callbacks=[EarlyStoppingCallback(early_stopping_patience = 2)]
         )
         trainer.train()
         self.tuned_model = lora_model
