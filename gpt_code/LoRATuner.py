@@ -13,6 +13,7 @@ from transformers import set_seed
 from scipy.special import softmax
 from sklearn.metrics import log_loss
 import sklearn
+import torch
 
 
 class LoRATuner:
@@ -98,7 +99,7 @@ class LoRATuner:
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             tokenizer=self.tokenizer, 
-            compute_metrics=self.compute_metrics,
+            #compute_metrics=self.compute_metrics,
             callbacks=[EarlyStoppingCallback(early_stopping_patience = 2)]
         )
         trainer.train()
@@ -110,5 +111,6 @@ class LoRATuner:
         model = GPT2LMHeadModel.from_pretrained(checkpoint_path)
         return pipeline('text-generation', model=model, tokenizer = tokenizer)
 
-    def get_response(pipeline, prompt):
+    def get_response(pipeline, prompt, seed):
+        set_seed(seed)
         return pipeline(prompt)[0]['generated_text']
