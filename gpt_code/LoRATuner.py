@@ -11,13 +11,16 @@ from sklearn.metrics import log_loss
 from torch import softmax
 from datasets import load_metric
 import evaluate
+from transformers import set_seed
+
 
 
 class LoRATuner:
     """
     Handles all the pretraining. Initialize with the base model.
     """
-    def __init__(self, model_name) -> None:
+    def __init__(self, model_name, seed) -> None:
+        set_seed(seed)
         self.base_model = GPT2LMHeadModel.from_pretrained(model_name)
         self.tokenizer = GPT2Tokenizer.from_pretrained(model_name)
         self.tuned_model = None
@@ -62,6 +65,7 @@ class LoRATuner:
         val_file = os.path.join("../data/", val_file_name)
         print(val_file)
         print(train_file)
+        set_seed(seed)
         lora_model = get_peft_model(self.base_model, config)
         #def compute_metrics(p):
         #    metric = evaluate.load("perplexity", module_type="metric")
@@ -109,7 +113,8 @@ class LoRATuner:
             seed = seed,
             metric_for_best_model='eval_loss',
             load_best_model_at_end=True ,
-            label_names = ["labels"]
+            label_names = ["labels"],
+            full_determinism = True
         )
         trainer = Trainer(
             model=lora_model,
@@ -119,7 +124,7 @@ class LoRATuner:
             eval_dataset=val_dataset,
             tokenizer=self.tokenizer, 
             #compute_metrics=compute_metrics,
-            callbacks=[EarlyStoppingCallback(early_stopping_patience = 2)]
+            #callbacks=[EarlyStoppingCallback(early_stopping_patience = 2)]
         )
         trainer.train()
         self.tuned_model = lora_model
