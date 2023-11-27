@@ -38,12 +38,6 @@ class LoRATuner:
             f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param:.2f}"
         )
 
-    # def print_target_modules(self):
-    #     print("Possible target modules for ", self.model.base_model._get_name())
-    #     for name, module in self.model.named_modules():
-    #         if "Linear4bit" in str(type(module)):
-    #             print(name.split(".")[-1])
-
     #Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
     def compute_metrics(self, p):
         logits = p.predictions
@@ -52,10 +46,6 @@ class LoRATuner:
         loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
         perplexity = np.exp(loss)
         return {"perplexity": perplexity}
-    #    perplex = load_metric('perplexity')
-    #    predictions, labels = eval_pred
-    #    predictions = predictions[:, 0]
-    #    return perplex.compute(predictions=predictions, references=labels)
 
 
     #Citation: Got this function template from https://212digital.medium.com/fine-tuning-the-gpt-2-large-language-model-unlocking-its-full-potential-66e3a082ab9c
@@ -66,22 +56,6 @@ class LoRATuner:
         print(train_file)
         set_seed(seed)
         lora_model = get_peft_model(self.base_model, config)
-        #def compute_metrics(p):
-        #    metric = evaluate.load("perplexity", module_type="metric")
-            #print(eval_preds)
-            #logits, labels = eval_preds
-            #print("logits")
-            #print(logits)
-            #print("labels")
-            #print(labels)
-            #predictions = np.argmax(logits, axis=-1)
-            #return metric.compute(predictions=predictions, references=labels)
-            #logits = p.predictions
-            #labels = p.label_ids
-            #probabilities = softmax(logits, axis=-1)
-            #loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
-            #perplexity = np.exp(loss)
-            #return {"perplexity": perplexity}
         
         train_dataset = TextDataset(
             tokenizer=self.tokenizer,
