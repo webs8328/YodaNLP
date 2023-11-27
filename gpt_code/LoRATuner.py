@@ -12,6 +12,7 @@ import evaluate
 from transformers import set_seed
 from scipy.special import softmax
 from sklearn.metrics import log_loss
+import sklearn
 
 
 class LoRATuner:
@@ -41,6 +42,7 @@ class LoRATuner:
     #Citation, got this from: https://212digital.medium.com/evaluating-gpt-2-language-model-a-step-by-step-guide-b451339e6a41
     def compute_metrics(self, p):
         logits = p.predictions
+        logits = logits / np.linalg.norm(logits, axis=-1, keepdims=True)
         labels = p.label_ids
         probabilities = softmax(logits, axis=-1)
         loss = log_loss(labels.flatten(), probabilities.reshape(-1, probabilities.shape[-1]), labels=[i for i in range(logits.shape[-1])])
