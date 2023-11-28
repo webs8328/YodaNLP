@@ -40,6 +40,14 @@ class LoRATuner:
         print(
             f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param:.2f}"
         )
+    
+    def print_potential_target_modules(self):
+        modules = set()
+        for name, _ in self.base_model.named_parameters():
+            splitstr = str(name).split('.')
+            if not (splitstr[-3].isnumeric()): modules.add(f"{splitstr[-3]}.{splitstr[-2]}")
+        
+        for m in modules: print(m)
 
     #Citation: Got this function template from https://212digital.medium.com/fine-tuning-the-gpt-2-large-language-model-unlocking-its-full-potential-66e3a082ab9c
     def tune(self, train_file_name, val_file_name, model_id, config, eval_steps=500, logging_steps=500, save_steps = 500, epochs = 1, max_steps = -1, seed = 0):
