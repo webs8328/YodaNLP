@@ -41,11 +41,14 @@ class LoRATuner:
             f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param:.2f}"
         )
     
+    # got from https://discuss.huggingface.co/t/how-to-use-modules-command-to-get-all-the-parameters-that-pertains-to-the-uppermost-layer-of-roberta-large-model/629
     def print_potential_target_modules(self):
         modules = set()
-        for name, _ in self.base_model.named_parameters():
+        for name, _ in self.base_model.named_modules():
             splitstr = str(name).split('.')
-            if not (splitstr[-3].isnumeric()): modules.add(f"{splitstr[-3]}.{splitstr[-2]}")
+            if (len(splitstr) > 3):
+                mod = splitstr[3:]
+                modules.add('.'.join(mod))
         
         for m in modules: print(m)
 
