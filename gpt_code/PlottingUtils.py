@@ -59,9 +59,30 @@ class Plotter:
 
         for i in range(len(vals)):
             plt.plot(steps, vals[i], label=str(experiments[i]))
-            
+        
+
         plt.legend()
         plt.title(f"{scalar} vs steps")
         plt.ylabel(f"{scalar}")
         plt.xlabel("steps")
         plt.show()
+    
+    def plot_perps(perps):
+        labels = [entry[0] for entry in perps]
+        data = [entry[1] for entry in perps]
+        steps = []
+        vals = []
+        
+        for entry in data:
+            steps.append([sub_entry[0] for sub_entry in entry])
+            vals.append([sub_entry[1] for sub_entry in entry])
+
+        for i in range(len(steps)):
+            plt.plot(steps[i], vals[i], label=labels[i])
+
+        plt.legend()
+        plt.title("perplexities vs steps")
+        plt.ylabel("perplexities")
+        plt.xlabel("steps")
+        plt.show()
+    
