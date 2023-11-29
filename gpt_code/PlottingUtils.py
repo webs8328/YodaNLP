@@ -58,8 +58,7 @@ class Plotter:
         steps = np.arange(len(vals[0]))
 
         for i in range(len(vals)):
-            plt.plot(steps, vals[i], label=str(experiments[i]))
-        
+            plt.plot(steps * 100, vals[i], label=str(experiments[i]))
 
         plt.legend()
         plt.title(f"{scalar} vs steps")
