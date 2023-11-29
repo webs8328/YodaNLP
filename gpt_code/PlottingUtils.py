@@ -2,7 +2,7 @@ from tensorboard.backend.event_processing.event_accumulator import EventAccumula
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-
+import numpy as np
 import os
 
 class Plotter:
@@ -28,7 +28,6 @@ class Plotter:
                 scalar_events = self.data.Scalars(scalar)
                 steps = [event.step for event in scalar_events]
                 vals = [event.value for event in scalar_events]
-                print(vals)
                 scalar_data.append((steps, vals))
             except:
                 print(f"Error retrieving scalar {scalar}.")
@@ -39,3 +38,30 @@ class Plotter:
         plt.xlabel("steps")
         plt.show()
         plt.close()
+    
+    def get_vals(self, scalar):
+        try:
+            scalar_events = self.data.Scalars(scalar)
+            vals = [event.value for event in scalar_events]
+        except:
+            return (f"Error retrieving scalar {scalar}.")
+        
+        return vals
+    
+    def plot_exps(experiments, scalar):
+        vals = []
+        for experiment in experiments:
+            curr_plotter = Plotter(experiment)
+            curr_vals = curr_plotter.get_vals(scalar)
+            vals.append(curr_vals)
+        
+        steps = np.arange(len(vals[0]))
+
+        for i in range(len(vals)):
+            plt.plot(steps, vals[i], label=str(experiments[i]))
+            
+        plt.legend()
+        plt.title(f"{scalar} vs steps")
+        plt.ylabel(f"{scalar}")
+        plt.xlabel("steps")
+        plt.show()
