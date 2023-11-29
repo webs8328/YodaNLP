@@ -100,13 +100,13 @@ def get_response(pipeline, prompt, seed):
     set_seed(seed)
     return pipeline(prompt)[0]['generated_text']
 
-def get_perplexity(checkpoints , test_data_file, path, seed):
+def get_perplexity(checkpoints , test_data_file, path, seed, split_on = "\n"):
     perplexity = load("perplexity", module_type="metric")
     avg_perps = []
     test_file = os.path.join("../data/", test_data_file)
     with open(test_file, 'r') as file:
         data = file.read()
-    data_list = data.split("\n")
+    data_list = data.split(split_on)
     random.seed(seed)
     random_seeds = []
     for _ in range(len(data_list)):
