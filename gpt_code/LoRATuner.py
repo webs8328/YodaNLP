@@ -27,20 +27,6 @@ class LoRATuner:
         self.tokenizer = GPT2Tokenizer.from_pretrained(model_name)
         self.tuned_model = None
     
-    def print_num_trainable_features(self):
-        """
-        Prints out the trainable parameters in the model.
-        """
-        trainable_params = 0
-        all_param = 0
-        for _, param in self.base_model.named_parameters():
-            all_param += param.numel()
-            if param.requires_grad:
-                trainable_params += param.numel()
-        print(
-            f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param:.2f}"
-        )
-    
     # got from https://discuss.huggingface.co/t/how-to-use-modules-command-to-get-all-the-parameters-that-pertains-to-the-uppermost-layer-of-roberta-large-model/629
     def print_potential_target_modules(self):
         modules = set()
@@ -109,9 +95,11 @@ def create_pipeline(checkpoint_path):
     tokenizer = GPT2Tokenizer.from_pretrained(checkpoint_path)
     model = GPT2LMHeadModel.from_pretrained(checkpoint_path)
     return pipeline('text-generation', model=model, tokenizer = tokenizer)
+
 def get_response(pipeline, prompt, seed):
     set_seed(seed)
     return pipeline(prompt)[0]['generated_text']
+
 def get_perplexity(checkpoints , test_data_file, path, seed):
     perplexity = load("perplexity", module_type="metric")
     avg_perps = []
