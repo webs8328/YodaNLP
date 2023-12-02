@@ -1,200 +1,200 @@
 User: Tell me about dinner.
-
+Yoda:***
 User: Tell me about older adult.
-
+Yoda:***
 User: Tell me about agency.
-
+Yoda:***
 User: Tell me about delivery.
-
+Yoda:***
 User: Tell me about teacher.
-
+Yoda:***
 User: Tell me about capitalism.
-
+Yoda:***
 User: Tell me about pattern.
-
+Yoda:***
 User: Tell me about student.
-
+Yoda:***
 User: Tell me about game.
-
+Yoda:***
 User: Tell me about early diagnosis.
-
+Yoda:***
 User: Tell me about sample.
-
+Yoda:***
 User: Tell me about letter of recommendation.
-
+Yoda:***
 User: Tell me about new chapter.
-
+Yoda:***
 User: Tell me about hop.
-
+Yoda:***
 User: Tell me about daytime exercise.
-
+Yoda:***
 User: Tell me about student.
-
+Yoda:***
 User: Tell me about barber.
-
+Yoda:***
 User: Tell me about plater.
-
+Yoda:***
 User: Tell me about bird.
-
+Yoda:***
 User: Tell me about dolphin.
-
+Yoda:***
 User: Tell me about veterinarian.
-
+Yoda:***
 User: Tell me about bobcat.
-
+Yoda:***
 User: Tell me about student.
-
+Yoda:***
 User: Tell me about scavenger.
-
+Yoda:***
 User: Tell me about conference.
-
+Yoda:***
 User: Tell me about respondent.
-
+Yoda:***
 User: Tell me about emphasis.
-
+Yoda:***
 User: Tell me about trouble.
-
+Yoda:***
 User: Tell me about court.
-
+Yoda:***
 User: Tell me about wind.
-
+Yoda:***
 User: Tell me about corporate structure.
-
+Yoda:***
 User: Tell me about orca.
-
+Yoda:***
 User: Tell me about pricing.
-
+Yoda:***
 User: Tell me about monitor.
-
+Yoda:***
 User: Tell me about prom.
-
+Yoda:***
 User: Tell me about leadership.
-
+Yoda:***
 User: Tell me about type.
-
+Yoda:***
 User: Tell me about assistance.
-
+Yoda:***
 User: Tell me about person.
-
+Yoda:***
 User: Tell me about election.
-
+Yoda:***
 User: Tell me about clot.
-
+Yoda:***
 User: Tell me about active page.
-
+Yoda:***
 User: Tell me about none.
-
+Yoda:***
 User: Tell me about refractive surgery.
-
+Yoda:***
 User: Tell me about faculty.
-
+Yoda:***
 User: Tell me about professional portrait.
-
+Yoda:***
 User: Tell me about herb.
-
+Yoda:***
 User: Tell me about police officer.
-
+Yoda:***
 User: Tell me about buffet.
-
+Yoda:***
 User: Tell me about sheep.
-
+Yoda:***
 User: Tell me about apple.
-
+Yoda:***
 User: Tell me about further investigation.
-
+Yoda:***
 User: Tell me about basic sportsman.
-
+Yoda:***
 User: Tell me about web browser.
-
+Yoda:***
 User: Tell me about room.
-
+Yoda:***
 User: Tell me about bright color.
-
+Yoda:***
 User: Tell me about person.
-
+Yoda:***
 User: Tell me about bed.
-
+Yoda:***
 User: Tell me about neutering.
-
+Yoda:***
 User: Tell me about serious wound.
-
+Yoda:***
 User: Tell me about fire extinguisher.
-
+Yoda:***
 User: Tell me about mare.
-
+Yoda:***
 User: Tell me about map.
-
+Yoda:***
 User: Tell me about larger circle.
-
+Yoda:***
 User: Tell me about Japan.
-
+Yoda:***
 User: Tell me about site.
-
+Yoda:***
 User: Tell me about topic.
-
+Yoda:***
 User: Tell me about example.
-
+Yoda:***
 User: Tell me about successful search.
-
+Yoda:***
 User: Tell me about gift basket.
-
+Yoda:***
 User: Tell me about human.
-
+Yoda:***
 User: Tell me about effect.
-
+Yoda:***
 User: Tell me about farmer.
-
+Yoda:***
 User: Tell me about athlete.
-
+Yoda:***
 User: Tell me about privatized relationship.
-
+Yoda:***
 User: Tell me about technical knowledge.
-
+Yoda:***
 User: Tell me about equipment.
-
+Yoda:***
 User: Tell me about recent report.
-
+Yoda:***
 User: Tell me about pricing.
-
+Yoda:***
 User: Tell me about photosynthesis.
-
+Yoda:***
 User: Tell me about dinosaur.
-
+Yoda:***
 User: Tell me about driver.
-
+Yoda:***
 User: Tell me about online discussion.
-
+Yoda:***
 User: Tell me about information.
-
+Yoda:***
 User: Tell me about earthworm.
-
+Yoda:***
 User: Tell me about utility.
-
+Yoda:***
 User: Tell me about story.
-
+Yoda:***
 User: Tell me about marketing.
-
+Yoda:***
 User: Tell me about urine.
-
+Yoda:***
 User: Tell me about water.
-
+Yoda:***
 User: Tell me about lioness.
-
+Yoda:***
 User: Tell me about older animal.
-
+Yoda:***
 User: Tell me about information.
-
+Yoda:***
 User: Tell me about customer.
-
+Yoda:***
 User: Tell me about tribe.
-
+Yoda:***
 User: Tell me about dialogue.
-
+Yoda:***
 User: Tell me about exercise.
-
+Yoda:***
 User: Tell me about game play.
-
+Yoda:***
 User: Tell me about beetle.
-
-User: Tell me about child.
-
+Yoda:***
+User: Tell me about child
+Yoda:***

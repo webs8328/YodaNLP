@@ -94,7 +94,14 @@ def get_dataset():
     x = load_dataset("generics_kb", name = 'generics_kb')['train']
     return x
 
-
+def format_data_user(dataset, indices):
+    output = []
+    for i in indices:
+        try:
+            output.append("User: Tell me about " + dataset[i]['term'] + ".\n")
+        except:
+            continue
+    return output
 def format_data_yoda(dataset, indices):
     output = []
     for i in indices:
